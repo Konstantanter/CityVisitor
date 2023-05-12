@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CityLibrary
 {
@@ -21,10 +19,18 @@ namespace CityLibrary
         /// Регистрация региона
         /// </summary>
         /// <param name="NameRegion">Имя региона (Наприемр: Республика Адыгея)</param>
-        public void AddRegion(string NameRegion)
+        public void AddRegion()
         {
             System.IO.Directory.CreateDirectory(GeneralData.PathRegion + NameRegion);
-            Serializer.SaveElem(GeneralData.PathRegion, NameRegion);
+            Serializer.SaveElem(GeneralData.RegionFile, NameRegion);
+        }
+        /// <summary>
+        /// Конструктор с параметром
+        /// </summary>
+        /// <param name="nameReg">Имя региона</param>
+        public Region(string nameReg)
+        {
+            NameRegion = nameReg;
         }
     }
 }
