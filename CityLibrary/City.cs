@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CityLibrary
 {
+    [Serializable]
     /// <summary>
     /// Класс описывающий город
     /// </summary>
@@ -17,6 +16,10 @@ namespace CityLibrary
         /// Краткая справка
         /// </summary>
         public string ShortReference { get; set; }
+        /// <summary>
+        /// Герб города
+        /// </summary>
+        public string PathGerb { get; set; }
         /// <summary>
         /// Дата посещения
         /// </summary>
