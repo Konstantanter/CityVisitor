@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+
 namespace CityLibrary
 {
     [Serializable]
@@ -58,22 +57,36 @@ namespace CityLibrary
             NameCity = nameCity;
             NameReg = nameReg;
             string pathDirRegion = GeneralData.PathRegion + NameReg + "\\";
-            PathCityFile = pathDirRegion + NameCity + $"\\Dat_{NameCity}.okn";
+            PathCityFile = pathDirRegion + $"\\Dat_{NameCity}.okn";
         }
         public string PathCityFile { get; set; }
         public void CreateCity()
         {
             Serializer.SaveToXml(PathCityFile, this);
         }
-
+        /// <summary>
+        /// Функция регистрации герба города
+        /// </summary>
+        /// <param name="pathGerb"></param>
         public void AddGerb(string pathGerb)
         {
             string dirCity = System.IO.Path.GetDirectoryName(PathCityFile);
-            string destName = $"{dirCity}\\Gerb{System.IO.Path.GetExtension(pathGerb)}";
+            string destName = $"{dirCity}\\Gerb_{NameCity}{System.IO.Path.GetExtension(pathGerb)}";
             System.IO.File.Copy(pathGerb, destName);
-            City city = Serializer.LoadFromXml<City>(dirCity + $"\\Dat_{NameCity}.okn");
+            City city = Serializer.LoadFromXml<City>(dirCity + "\\"+NameCity+ $"\\Dat_{NameCity}.okn");
             city.PathGerb = destName;
 
+            Serializer.SaveToXml(dirCity + $"\\Dat_{NameCity}.okn", city);
+        }
+        /// <summary>
+        /// Функция регистрации краткого описания города
+        /// </summary>
+        /// <param name="shortReference">Краткое описание города</param>
+        public void AddShortreference(string shortReference)
+        {
+            string dirCity = System.IO.Path.GetDirectoryName(PathCityFile);
+            City city = Serializer.LoadFromXml<City>(dirCity + $"\\Dat_{NameCity}.okn");
+            city.PathGerb = shortReference;
             Serializer.SaveToXml(dirCity + $"\\Dat_{NameCity}.okn", city);
         }
     }

@@ -41,7 +41,7 @@ namespace CityLibrary
             string pathDirRegion = GeneralData.PathRegion + NameRegion + "\\";
             System.IO.Directory.CreateDirectory(pathDirRegion + NameCity);
             City city = new City();
-            city.PathCityFile = pathDirRegion + NameCity + $"\\Dat_{NameCity}.okn";
+            city.PathCityFile = pathDirRegion +NameCity+ $"\\Dat_{NameCity}.okn";
             city.NameCity = NameCity;
             city.NameReg = NameRegion;
             city.CreateCity();

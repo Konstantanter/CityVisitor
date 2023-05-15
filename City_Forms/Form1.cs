@@ -1,4 +1,14 @@
-namespace CityForms
+п»їusing System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace City_Forms
 {
     public partial class Form1 : Form
     {
@@ -7,11 +17,11 @@ namespace CityForms
             InitializeComponent();
         }
         /// <summary>
-        /// Список регионов
+        /// РЎРїРёСЃРѕРє СЂРµРіРёРѕРЅРѕРІ
         /// </summary>
         public List<string> ListRegs = new List<string>();
         /// <summary>
-        /// Функция обновления списка регионов
+        /// Р¤СѓРЅРєС†РёСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° СЂРµРіРёРѕРЅРѕРІ
         /// </summary>
         void UpdateComboBox()
         {
@@ -29,18 +39,19 @@ namespace CityForms
             CityLibrary.Region region = new CityLibrary.Region(textRegName.Text);
             region.AddRegion();
             UpdateComboBox();
-            MessageBox.Show("Магия успешна");
+            MessageBox.Show("РњР°РіРёСЏ СѓСЃРїРµС€РЅР°");
             textRegName.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             UpdateComboBox();
+            
         }
 
         private void comboRegs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // pictCity.Se
+            comboRegs.SelectionLength = 0;
             labelCityName.Visible = true;
             textCityName.Visible = true;
             buttonCityAdd.Visible = true;
@@ -59,7 +70,7 @@ namespace CityForms
             }
 
         }
-
+       
         private void buttonCityAdd_Click(object sender, EventArgs e)
         {
             int regIndex = comboRegs.SelectedIndex;
@@ -73,7 +84,9 @@ namespace CityForms
                 {
                     CityLibrary.Region region = new CityLibrary.Region(selectedRegName);
                     region.AddCity(nameCity);
-                    MessageBox.Show("Город успешно добавлен");
+                    CityLibrary.DataBase dataBase= new CityLibrary.DataBase();
+                    dataBase.AddCityFromBD(selectedRegName, nameCity);
+                    MessageBox.Show("Р“РѕСЂРѕРґ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ");
                     textCityName.Text = "";
                 }
             }
@@ -87,9 +100,11 @@ namespace CityForms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            CityLibrary.City city = new CityLibrary.City("Республика Адыгея", "Майкоп");
-            city.AddGerb(@"C:\Users\BRONUF\Desktop\Ждун.jpg");
-            MessageBox.Show("герб добавлен");
+            CityLibrary.City city = new CityLibrary.City("Р РµСЃРїСѓР±Р»РёРєР° РђРґС‹РіРµСЏ", "РњР°Р№РєРѕРї");
+            city.AddGerb(@"C:\Users\BRONUF\Desktop\Р–РґСѓРЅ.jpg");
+            MessageBox.Show("РіРµСЂР± РґРѕР±Р°РІР»РµРЅ");
         }
+
+
     }
 }
