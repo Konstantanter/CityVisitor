@@ -20,7 +20,7 @@ namespace CityLibrary
         /// <summary>
         /// Путь хранения региона 
         /// </summary>
-        public static string PathRegion { get; private set; } = MainPath + "\\Region\\";
+        public static string PathRegion { get; private set; } = MainPath + "Region\\";
         /// <summary>
         /// Файл для хранения региона
         /// </summary>

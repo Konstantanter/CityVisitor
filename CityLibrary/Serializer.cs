@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -37,7 +38,14 @@ namespace CityLibrary
             }
 
         }
-
+        public static T LoadFromXml<T>(String fileName)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            using (XmlReader reader = XmlReader.Create(fileName))
+            {
+                return (T)serializer.Deserialize(reader);
+            }
+        }
         public static void SaveToXml<T>(String FileName, T SerializableObject)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
@@ -67,7 +75,7 @@ namespace CityLibrary
             }
             return null;
         }
-
+       
         #endregion
     }
 }

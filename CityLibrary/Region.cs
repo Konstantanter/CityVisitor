@@ -32,5 +32,21 @@ namespace CityLibrary
         {
             NameRegion = nameReg;
         }
+        /// <summary>
+        /// Функция регистрации города в регионе
+        /// </summary>
+        /// <param name="NameCity">Имя города</param>
+        public void AddCity(string NameCity)
+        {
+            string pathDirRegion = GeneralData.PathRegion + NameRegion + "\\";
+            System.IO.Directory.CreateDirectory(pathDirRegion + NameCity);
+            City city = new City();
+            city.PathCityFile = pathDirRegion + NameCity + $"\\Dat_{NameCity}.okn";
+            city.NameCity = NameCity;
+            city.NameReg = NameRegion;
+            city.CreateCity();
+            Serializer.SaveElem(pathDirRegion + "\\City.okn", NameCity);
+
+        }
     }
 }
